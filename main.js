@@ -37,7 +37,7 @@ function createCameraWindows() {
   win.on('close', function () { win = null })
   win.loadURL(modalPath)
   win.show()
-  win.webContents.openDevTools();
+  // win.webContents.openDevTools();
 }
 
 // 当 Electron 完成初始化并准备创建浏览器窗口时调用此方法

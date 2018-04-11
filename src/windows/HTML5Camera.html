@@ -6,33 +6,69 @@
   <title>web RTC 测试</title>
   <style>
     .booth {
-      width: 400px;
-
-      background: #ccc;
-      border: 10px solid #ddd;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background: rgb(212, 212, 212);
       margin: 0 auto;
+    }
+
+    .button {
+      width: 50px;
+      height: 50px;
+      border-radius: 25px;
+      background: #ffffff;
+    }
+
+    .button-background {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      position: float;
+      top: 90%;
+      left: 365px;
+      width: 70px;
+      height: 70px;
+      border-radius: 35px;
+      background: #e9e9e9e7;
+    }
+
+    .canvas {
+      margin-top: 10px;
+      width: 0;
+      height: 0;
+    }
+
+    .video {
+      width: 800px;
+      height: 600px;
     }
   </style>
 </head>
+<script>
+  var video = document.getElementById('video');
+  video.style.width = document.body.clientWidth;
+  video.style.height = document.body.clientHeight;
+</script>
 
 <body>
+
   <div class="booth">
-    <video id="video" width="400" height="300"></video>
-    <button id='tack'> snap shot</button>
-    <canvas id='canvas' width='400' height='300'></canvas>
-
-
-    <img id='img' src=''>
-
+    <video id="video" class="video"></video>
+    <div id="xxx" class="button-background">
+      <button id='tack' class="button">识别</button>
+    </div>
+    <canvas class="canvas" id='canvas'></canvas>
   </div>
-  <a id="close" href="javascript:window.close();">关闭此窗体</a>
-
   <script>
     var video = document.getElementById('video'),
       canvas = document.getElementById('canvas'),
       snap = document.getElementById('tack'),
       img = document.getElementById('img'),
-      vendorUrl = window.URL || window.webkitURL;
+      xxx = document.getElementById('xxx');
+    vendorUrl = window.URL || window.webkitURL;
 
     //媒体对象
     navigator.getMedia = navigator.getUserMedia ||
@@ -51,14 +87,25 @@
       console.log(error);
     });
     snap.addEventListener('click', function () {
-
+      xxx.style.display = 'none';
+      video.style.display = 'none';
+      canvas.style.width = '800px';
+      canvas.style.height = '600px';
+      setTimeout(function () {
+        var mymessage = confirm("验证成功！");
+        if (mymessage == true) {
+          window.close();
+        } else if (mymessage == false) {
+          window.close();
+        }
+      }, 1000)
       //绘制canvas图形
       canvas.getContext('2d').drawImage(video, 0, 0, 400, 300);
 
       //把canvas图像转为img图片
-      img.src = canvas.toDataURL("image/png");
+      //img.src = canvas.toDataURL("image/png");
       const ipcRenderer = require('electron').ipcRenderer;
-      ipcRenderer.send("finish_check_employee_message","finish");
+      ipcRenderer.send("finish_check_employee_message", "finish");
     });
   </script>
 </body>
