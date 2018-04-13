@@ -60,8 +60,7 @@ export default class Selfmessage extends Component {
                     <Selfmsgcard 
                         name={this.state.mineInfo.name} 
                         email={this.state.mineInfo.email} 
-                        tel={this.state.mineInfo.tel} 
-                        src2={require('../icon/page.svg')} />
+                        tel={this.state.mineInfo.tel}/>
                     <Bolddivider />
                     <Selfsay icon={require('../icon/pencil.svg')} />
                     <Bolddivider />

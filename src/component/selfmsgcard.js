@@ -10,7 +10,8 @@ export default class Selfmeaasge extends Component{
         src1:null,
         src2:null,
         email:'',
-        tel:''
+        tel:'',
+        link:''
     };
     constructor(props){
 		super(props);
@@ -46,7 +47,7 @@ export default class Selfmeaasge extends Component{
                         justifyContent:'flex-start',
                         alignItems:'flex-end',
                     }}>
-                        <Link to='/contact'>
+                        <Link to={this.props.link}>
                         <img style={{
                             marginLeft:20
                         }} src={this.props.src1}></img>

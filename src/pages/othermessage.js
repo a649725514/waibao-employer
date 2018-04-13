@@ -64,15 +64,14 @@ export default class Othermessage extends Component {
                                 name={this.state.persionInfo.name}
                                 company={this.state.persionInfo.company}
                                 email={this.state.persionInfo.email}
-                                tel={this.state.persionInfo.tel}/>
+                                tel={this.state.persionInfo.tel}
+                                link={'/contact'}/>
                     <Bolddivider />
                     <Selfsay />
                     <Bolddivider />
                     <Workexp exp={this.state.persionInfo.exp}/>
                     <Bolddivider />
                     <Workskill skills={this.state.persionInfo.skills}/>
-                    <Bolddivider />
-                    <Workproject />
                     <Bolddivider />
                 </Scrollbars>
             </div>

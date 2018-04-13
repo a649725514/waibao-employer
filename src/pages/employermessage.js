@@ -25,11 +25,9 @@ export default class Employermessage extends Component {
             }}>
                 <Topbar title="他人信息" />
                 <Scrollbars style={{width:this.state.width*0.85,height:this.state.height*0.94}}>
-                    <Selfmsgcard src1={require('../icon/chevron-left.svg')} />
+                    <Selfmsgcard src1={require('../icon/chevron-left.svg')} link={'/contact2'} />
                     <Bolddivider />
                     <Selfsay />
-                    <Bolddivider />
-                    <Workproject />
                     <Bolddivider />
                 </Scrollbars>
             </div>

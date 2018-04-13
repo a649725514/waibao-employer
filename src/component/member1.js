@@ -1,25 +1,19 @@
 import React, { Component } from 'react';
 import { Progress } from 'antd';
-export default class Member extends Component {
+export default class Member1 extends Component {
     static defaultProps = {
         name: '小王',
         company: 'I外包公司',
-        time: 4,
-        pic: require('../pic/08.png')
+        //time: 4,
+        pic: require('../pic/08.png'),
+        color: 'black'
     };
     constructor(props) {
         super(props);
         this.state = {
             width: document.body.clientWidth,
-            height: document.body.clientHeight,
-            pic: require('../icon/bell-g.svg')
+            height: document.body.clientHeight
         };
-    }
-    click() {
-        this.setState({
-            pic : require('../icon/bell-r.svg'),
-        })
-        alert('已通知该成员尽快完成！');
     }
     render() {
         return (
@@ -30,9 +24,9 @@ export default class Member extends Component {
                 flexDirection: 'row',
                 justifyContent: 'flex-start',
                 alignItems: 'center',
-                borderBottom: 'solid',
-                borderBottomColor: '#e9e9e9',
-                borderBottomWidth: 1
+                borderBottom:'solid',
+                borderBottomColor:'#e9e9e9',
+                borderBottomWidth:1
             }}>
                 <div style={{
                     display: 'flex',
@@ -40,7 +34,7 @@ export default class Member extends Component {
                     height: this.state.height * 0.1,
                     justifyContent: 'center',
                     alignItems: 'center',
-                    marginLeft: this.state.height * 0.03
+                    marginLeft:this.state.height * 0.03
                 }}>
                     <img style={{
                         width: this.state.height * 0.08,
@@ -78,34 +72,29 @@ export default class Member extends Component {
                 </div>
                 <div style={{
                     display: 'flex',
-                    width: this.state.width * 0.85 - this.state.height * 0.49 - this.state.width * 0.1,
+                    width: this.state.width * 0.85-this.state.height*0.39-this.state.width*0.1,
                     height: this.state.height * 0.1,
                     flexDirection: 'column',
                     marginLeft: this.state.height * 0.03,
-                    justifyContent: 'center',
-                    alignItems: 'center'
+                    justifyContent:'center',
+                    alignItems:'center'
                 }}>
-                    <Progress percent={this.props.time / 8 * 100} status="active" showInfo={false} />
+                    {/* <Progress percent={this.props.time/8*100} status="active" showInfo={false} /> */}
                 </div>
                 <div style={{
                     display: 'flex',
-                    width: this.state.width * 0.1,
+                    width: this.state.width*0.1,
                     height: this.state.height * 0.1,
                     flexDirection: 'column',
-                    justifyContent: 'center',
-                    alignItems: 'center'
+                    justifyContent:'center',
+                    alignItems:'center'
                 }}>
-                    <h>{this.props.time + 'h'}</h>
-                </div>
-                <div style={{
-                    display: 'flex',
-                    width: this.state.height * 0.1,
-                    height: this.state.height * 0.1,
-                    flexDirection: 'column',
-                    justifyContent: 'center',
-                    alignItems: 'center'
-                }} onClick={()=>this.click()}>
-                    <img src={this.state.pic}></img>
+                    <div style={{
+                        width:0.02*this.state.height,
+                        height:0.02*this.state.height,
+                        borderRadius:0.01*this.state.height,
+                        backgroundColor:this.props.color
+                    }}></div>
                 </div>
             </div>
         );

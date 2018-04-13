@@ -4,8 +4,9 @@ import Msg from './msg';
 import Member from './member';
 import Task from './task';
 import Resource from './resource';
+import Resource1 from './resource1';
 import Selfdivider from './divider';
-import { Button } from 'antd/lib/radio';
+import { Upload, Button } from 'antd';
 export default class Comment1 extends Component {
     static defaultProps = {
     };
@@ -180,7 +181,9 @@ export default class Comment1 extends Component {
                     alignItems: 'center',
                 }}>
                     <Say />
-                    <Msg />
+                    <Msg user={"用户H"} situation={"做的不错"} comefrom={"1L"} pic={require('../pic/01.png')} />
+                    <Msg user={"用户C回复1L"} situation={"谢谢！"} comefrom={"2L"} pic={require('../pic/02.png')} />
+                    <Msg user={"用户H回复2L"} situation={"/smile"} comefrom={"3L"} pic={require('../pic/01.png')} />
                 </div>
                 <div style={{
                     display: this.state.display2,
@@ -198,6 +201,24 @@ export default class Comment1 extends Component {
                     justifyContent: 'flex-start',
                     alignItems: 'center',
                 }}>
+                    <Upload>
+                        <div style={{
+                            display: 'flex',
+                            flexDirection: 'row',
+                            width: this.state.width * 0.85,
+                            height: this.state.height * 0.06,
+                            justifyContent: 'flex-start',
+                            alignItems: 'center',
+                        }}>
+                            <img style={{
+                                marginLeft: 20,
+                                marginRight: 20,
+                            }} src={require('../icon/file_upload.svg')}></img>
+                            <h style={{
+                                color: 'rgb(0,122,255)'
+                            }}>{'上传附件'}</h>
+                        </div>
+                    </Upload>
                     <Resource />
                 </div>
                 <div style={{
@@ -210,47 +231,15 @@ export default class Comment1 extends Component {
                     <div style={{
                         display: 'flex',
                         flexDirection: 'row',
+                        justifyContent:'flex-start',
+                        alignItems:'center',
                         width: this.state.width * 0.85,
                         height: this.state.height * 0.06,
-                        borderBottom: 'solid',
-                        borderBottomColor: '#e9e9e9',
-                        borderBottomWidth: 1
                     }}>
-                        <div style={{
-                            display: 'flex',
-                            flexDirection: 'row',
-                            width: this.state.width * 0.85/2,
-                            height: this.state.height * 0.06,
-                            justifyContent: 'flex-start',
-                            alignItems: 'center',
-                        }}>
-                            <img style={{marginLeft:this.state.width*0.02}} src={require('../icon/plus-blue.svg')}></img>
-                            <h style={{color:'rgb(26,145,255)',fontWeight:'bold',marginLeft:10}}>{'添加工作成果'}</h>
-                        </div>
-                        <div style={{
-                            display: 'flex',
-                            flexDirection: 'column',
-                            width: this.state.width * 0.85/2,
-                            height: this.state.height * 0.06,
-                            justifyContent: 'center',
-                            alignItems: 'flex-end',
-                        }}>
-                            <div style={{
-                                display: 'flex',
-                                flexDirection: 'column',
-                                width: this.state.width * 0.1,
-                                height: this.state.height * 0.04,
-                                justifyContent: 'center',
-                                alignItems: 'center',
-                                backgroundColor:'rgb(132,195,85)',
-                                borderRadius:3,
-                                marginRight:this.state.width*0.02
-                            }} onClick={()=>this.click()}>
-                                <h style={{color:'white'}}>{'开始成果审核'}</h>
-                            </div>
-                        </div>
+                        <Button style={{marginLeft:20,backgroundColor:'rgb(132,195,85)',width:this.state.width*0.1}}><h style={{color:'white'}}>通过</h></Button>
+                        <Button style={{marginLeft:20,width:this.state.width*0.1}} type='danger'>不通过</Button>
                     </div>
-                    <Resource />
+                    <Resource1 />
                 </div>
             </div>
         );

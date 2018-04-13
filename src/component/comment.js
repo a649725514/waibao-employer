@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import Say from './say';
 import Msg from './msg';
-import Member from './member';
+import Member1 from './member1';
 import Task from './task';
 import Resource from './resource';
 import Selfdivider from './divider';
+import { Upload, Button, Icon } from 'antd';
+const color = ['red', 'orange', 'black'];
 export default class Comment extends Component {
     static defaultProps = {
     };
@@ -21,10 +23,10 @@ export default class Comment extends Component {
             color2: 'black',
             color3: 'black',
             color4: 'black',
-            borderBottomColor1:'white',
-            borderBottomColor2:'#e9e9e9',
-            borderBottomColor3:'#e9e9e9',
-            borderBottomColor4:'#e9e9e9',
+            borderBottomColor1: 'white',
+            borderBottomColor2: '#e9e9e9',
+            borderBottomColor3: '#e9e9e9',
+            borderBottomColor4: '#e9e9e9',
         };
     }
     press1() {
@@ -37,10 +39,10 @@ export default class Comment extends Component {
             color2: 'black',
             color3: 'black',
             color4: 'black',
-            borderBottomColor1:'white',
-            borderBottomColor2:'#e9e9e9',
-            borderBottomColor3:'#e9e9e9',
-            borderBottomColor4:'#e9e9e9',
+            borderBottomColor1: 'white',
+            borderBottomColor2: '#e9e9e9',
+            borderBottomColor3: '#e9e9e9',
+            borderBottomColor4: '#e9e9e9',
         })
     }
     press2() {
@@ -53,10 +55,10 @@ export default class Comment extends Component {
             color2: 'rgb(26,145,255)',
             color3: 'black',
             color4: 'black',
-            borderBottomColor1:'#e9e9e9',
-            borderBottomColor2:'white',
-            borderBottomColor3:'#e9e9e9',
-            borderBottomColor4:'#e9e9e9',
+            borderBottomColor1: '#e9e9e9',
+            borderBottomColor2: 'white',
+            borderBottomColor3: '#e9e9e9',
+            borderBottomColor4: '#e9e9e9',
         })
     }
     press3() {
@@ -69,10 +71,10 @@ export default class Comment extends Component {
             color2: 'black',
             color3: 'rgb(26,145,255)',
             color4: 'black',
-            borderBottomColor1:'#e9e9e9',
-            borderBottomColor2:'#e9e9e9',
-            borderBottomColor3:'white',
-            borderBottomColor4:'#e9e9e9',
+            borderBottomColor1: '#e9e9e9',
+            borderBottomColor2: '#e9e9e9',
+            borderBottomColor3: 'white',
+            borderBottomColor4: '#e9e9e9',
         })
     }
     press4() {
@@ -85,10 +87,10 @@ export default class Comment extends Component {
             color2: 'black',
             color3: 'black',
             color4: 'rgb(26,145,255)',
-            borderBottomColor1:'#e9e9e9',
-            borderBottomColor2:'#e9e9e9',
-            borderBottomColor3:'#e9e9e9',
-            borderBottomColor4:'white',
+            borderBottomColor1: '#e9e9e9',
+            borderBottomColor2: '#e9e9e9',
+            borderBottomColor3: '#e9e9e9',
+            borderBottomColor4: 'white',
         })
     }
     render() {
@@ -176,7 +178,9 @@ export default class Comment extends Component {
                     alignItems: 'center',
                 }}>
                     <Say />
-                    <Msg />
+                    <Msg user={"用户H"} situation={"做的不错"} comefrom={"1L"} pic={require('../pic/01.png')} />
+                    <Msg user={"用户C回复1L"} situation={"谢谢！"} comefrom={"2L"} pic={require('../pic/02.png')} />
+                    <Msg user={"用户H回复2L"} situation={"/smile"} comefrom={"3L"} pic={require('../pic/01.png')} />
                 </div>
                 <div style={{
                     display: this.state.display2,
@@ -185,7 +189,10 @@ export default class Comment extends Component {
                     justifyContent: 'flex-start',
                     alignItems: 'center',
                 }}>
-                    <Member />
+                    <Member1 name={'甲'} company={'技术部 总监'} pic={require('../pic/03.png')} color={color[0]} />
+                    <Member1 name={'乙'} company={'人事部 职员'} pic={require('../pic/04.png')} color={color[1]} />
+                    <Member1 name={'小李'} company={'Y外包公司'} pic={require('../pic/06.png')} color={color[2]} />
+                    <Member1 name={'小张'} company={'U外包公司'} pic={require('../pic/05.png')} color={color[2]} />
                 </div>
                 <div style={{
                     display: this.state.display3,
@@ -204,6 +211,16 @@ export default class Comment extends Component {
                     justifyContent: 'flex-start',
                     alignItems: 'center',
                 }}>
+                    <div style={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        justifyContent: 'center',
+                        alignItems: 'flex-end',
+                        width: this.state.width * 0.85,
+                        height: this.state.height * 0.06,
+                    }}>
+                        <Upload><img style={{marginRight:this.state.width*0.04}} src={require('../icon/plus.svg')}></img></Upload>
+                    </div>
                     <Resource />
                 </div>
             </div>
