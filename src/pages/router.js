@@ -23,6 +23,8 @@ import Addtask from './addtask';
 import Changetask from './changetask';
 import Changeproject from './changeproject';
 import Setting from './setting';
+const {ipcRenderer} = window.electron;
+
 // Some folks find value in a centralized route config.
 // A route config is just data. React is great at mapping
 // data into components, and <Route> is a component.
@@ -30,8 +32,6 @@ import Setting from './setting';
 ////////////////////////////////////////////////////////////
 // first our route components
 //const Main = () => <h2>Main</h2>;
-
-const loginstate = true;
 
 // const Sandwiches = () => <h2>Sandwiches</h2>;
 
@@ -86,7 +86,7 @@ const routes = [
     component: Selfmessage,
   },
   {
-    path:"/tasks/:date0/:date1/:date2/:date3/:project/:date/:taskname/:stars/:time/:name/:duty/:tele/:email",
+    path:"/tasks/:id/:taskContent/:date0/:date1/:date2/:date3/:project/:date/:taskname/:stars/:time/:name/:duty/:tele/:email",
     component: Tasks,
   },
   {
@@ -94,7 +94,7 @@ const routes = [
     component: Othertasks,
   },
   {
-    path:"/projects",
+    path:"/projects/:id/:projectContent/:date/:projectname/:stars/:time/:name/:duty/:tele/:email",
     component: Projects,
   },
   {
@@ -173,7 +173,7 @@ const RouteWithSubRoutes = route => (
   />
 );
 function IsLogined(){
-  if(loginstate==false){  
+  if(ipcRenderer.sendSync('get_mine_token', 'please')==""){  
     return <Login /> 
   }else{  
     return <div>{routes.map((route, i) => <RouteWithSubRoutes key={i} {...route} />)}</div>

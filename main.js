@@ -8,7 +8,7 @@ const ipc = require('electron').ipcMain;
 const cronJob = require('cron').CronJob;
 // 保持window对象的全局引用,避免JavaScript对象被垃圾回收时,窗口被自动关闭.
 let mainWindow
-let token = "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxMDAyMSIsImNyZWF0ZWQiOjE1MjI2NzkxNzU0NTYsImV4cCI6MTUyMzI4Mzk3NX0.aVfzBSOxtrsjffx4K-Jja9jiR_v7YA5fp1HkvXYwrovMAXnDprYk6jrzfC180BK57gWM5xi8WJhoqDXmdkDocQ"
+let token = ""
 // var server = new StaticServer({
 //   rootPath: path.join(__dirname,'build'),                // required, the root of the server file tree
 //   port: 3000,               // required, the port to listen
@@ -23,7 +23,7 @@ function createWindow() {
 
   mainWindow.loadURL('http://localhost:3000/');
   // 打开开发者工具，默认不打开
-  // mainWindow.webContents.openDevTools()
+  mainWindow.webContents.openDevTools()
 
   // 关闭window时触发下列事件.
   mainWindow.on('closed', function () {
@@ -53,6 +53,7 @@ app.on('ready', function () {
 })
 ipc.on('camera-message', function (event, arg) {
   createCameraWindows();
+  event.sender.send('camera-message-reply', '验证通过')
 })
 var tevent;
 var jobid = new cronJob('*/30 * * * * *', () => {
@@ -61,7 +62,9 @@ var jobid = new cronJob('*/30 * * * * *', () => {
 }, null, false, 'Asia/Chongqing');
 
 ipc.on('finish_check_employee_message', (event, arg) => {
-  this.tevent.sender.send('checking_employee_finish_message', 'pong')
+  if(tevent != undefined) {
+    this.tevent.sender.send('checking_employee_finish_message', 'pong')
+  }
 })
 
 ipc.on('start_check_employee_message', (event, arg) => {
@@ -77,12 +80,13 @@ ipc.on('end_check_employee_message', (event, arg) => {
 
 ipc.on('get_mine_token', (event, arg) => {
   // this.token = 'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxMDAyMSIsImNyZWF0ZWQiOjE1MjI2NzkxNzU0NTYsImV4cCI6MTUyMzI4Mzk3NX0.aVfzBSOxtrsjffx4K-Jja9jiR_v7YA5fp1HkvXYwrovMAXnDprYk6jrzfC180BK57gWM5xi8WJhoqDXmdkDocQ'
-  console.log(token)
   event.returnValue = token;
 })
 
 ipc.on('Login', (event, arg) => {
   token = arg;
+  createCameraWindows();
+
   // console.log(arg)
   event.returnValue = 'ok'
 })

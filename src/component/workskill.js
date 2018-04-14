@@ -83,32 +83,7 @@ export default class Workskill extends Component {
                         {
                             this.props.skills.map((skill) => {
                                 return (
-                                    <Button style={{ margin: 20 }} type="danger" onClick={() => {
-                                        var url = 'http://120.78.74.75:8080/demo/auth'; // 接口url
-                                        fetch(url, {
-                                            "method": 'POST',
-                                            "headers": {
-                                                "Content-Type": "application/json",
-                                            },
-                                            "body": JSON.stringify({
-                                                "username": "10000",
-                                                "password": "111111",
-                                            })
-                                        }).then(
-                                            (res) => {
-                                                if (res.ok) {
-                                                    // console.log(res.json());
-                                                    return res.json()
-                                                } else {
-                                                    { this.LogError(res) }
-                                                }
-
-                                            }
-                                        ).then((PromiseValue) => {
-                                            const reply = ipcRenderer.sendSync('Login', PromiseValue.token)
-                                            console.log(reply);
-                                        })
-                                    }}>{skill} </Button>
+                                    <Button style={{ margin: 20 }} type="danger">{skill} </Button>
                                 )
                             })
                         }

@@ -3,6 +3,7 @@ import  { Rate } from 'antd';
 import { Link } from "react-router-dom";
 export default class Task extends Component{
     static defaultProps={
+        id: 0,
         task:"任务a",
         uploader: {},
         project:"项目B",
@@ -26,11 +27,13 @@ export default class Task extends Component{
     render(){
         return (
           <Link to={this.props.renwu
+            + `/${this.props.id}`
+            + `/${this.props.taskContent}`
              + `/${this.props.date0}`
              + `/${this.props.date1}`
              + `/${this.props.date2}`
              + `/${this.props.date3}`
-             + `/${this.props.project}`
+             + `/${this.props.project.name}`
              + `/${this.props.endDate!=null?this.props.endDate:'未知'}`
              + `/${this.props.task}`
              + `/${this.props.stars}`
@@ -110,7 +113,7 @@ export default class Task extends Component{
                     alignItems:'flex-start',
                     marginRight:30
                   }}>
-                    <h style={{color:'black'}}>所属项目：{this.props.project}</h>
+                    <h style={{color:'black'}}>所属项目：{this.props.project.name}</h>
                   </div>
                 </div>
                 <div style={{

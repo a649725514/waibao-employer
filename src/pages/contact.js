@@ -25,7 +25,7 @@ class Contact extends Component {
 
   onChange = (page) => {
     if (this.state.persion[page * 6 - 5 + 1] == null) {
-      var url = 'http://120.78.74.75:8080/demo/s/getUserMsg?page=' + (page - 1); // 接口url
+      var url = 'http://120.78.74.75:8080/demo/s/getUserMsg?page=' + (page - 1)+'&model=0'; // 接口url
       fetch(url, {
         "method": 'POST',
         "headers": {
@@ -74,7 +74,7 @@ class Contact extends Component {
       }
     ).then((PromiseValue) => {
       this.setState({ persion: new Array(PromiseValue) });
-      var url = 'http://120.78.74.75:8080/demo/s/getUserMsg?page=0'; // 接口url
+      var url = 'http://120.78.74.75:8080/demo/s/getUserMsg?page=0&model=0'; // 接口url
       fetch(url, {
         "method": 'POST',
         "headers": {
@@ -151,7 +151,7 @@ class Contact extends Component {
             return (
               <div>
                 <Link to={`/othermessage/`+persionInfo.workNumber}>
-                  <Contactcard src={require('../pic/01.png')} name={persionInfo.name} company={persionInfo.company} skills={persionInfo.skills}/>
+                <Contactcard src={'http://120.78.74.75:8010/'+persionInfo.workNumber+'/1.jpg'} name={persionInfo.name} company={persionInfo.company} skills={persionInfo.skills}/>
                 </Link>
               </div>
             )

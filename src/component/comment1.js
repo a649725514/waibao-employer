@@ -7,6 +7,8 @@ import Resource from './resource';
 import Resource1 from './resource1';
 import Selfdivider from './divider';
 import { Upload, Button } from 'antd';
+const { ipcRenderer } = window.electron;
+
 export default class Comment1 extends Component {
     static defaultProps = {
     };
@@ -28,7 +30,10 @@ export default class Comment1 extends Component {
             borderBottomColor3: '#e9e9e9',
             borderBottomColor4: '#e9e9e9',
         };
+        ipcRenderer.on('camera-message-reply', function (event, arg) {
+        })
     }
+
     press1() {
         this.setState({
             display1: 'flex',
@@ -62,6 +67,9 @@ export default class Comment1 extends Component {
         })
     }
     press3() {
+        if (this.state.info.stars > 2) {
+            ipcRenderer.send('camera-message', 'ping')
+        }
         this.setState({
             display1: 'none',
             display2: 'none',

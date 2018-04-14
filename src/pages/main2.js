@@ -6,13 +6,47 @@ import Topbar from '../component/topbar'
 import { Link } from "react-router-dom";
 import Projectlist from '../component/projectlist';
 const Search = Input.Search;
+const { ipcRenderer } = window.electron;
 class Main2 extends Component {
   constructor(props) {
     super(props);
     this.state = ({
       width: document.body.clientWidth,
-      height: document.body.clientHeight
+      height: document.body.clientHeight,
+      projectsInfo: [],
+      current: 1,
+      token: ipcRenderer.sendSync('get_mine_token', 'please')
     })
+  }
+  onChange = (page) => {
+    console.log(page);
+    this.setState({
+      current: page,
+    });
+  }
+
+  componentWillMount() {
+    var url = 'http://120.78.74.75:8080/demo/project/getProjectByUser'; // 接口url
+    fetch(url, {
+      "method": 'GET',
+      "headers": {
+        "Authorization": "Bearer " + this.state.token,
+        "Content-Type": "application/json",
+      },
+    }).then(
+      function (res) {
+        if (res.ok) {
+          return res.json()
+        } else {
+          { this.LogError(res) }
+        }
+      }
+    ).then((PromiseValue) => {
+      for (var i = 0; i < PromiseValue.length; i++) {
+        this.setState({ 'projectsInfo': [...this.state.projectsInfo, PromiseValue[i]] })
+      }
+    });
+    // this.state.projectsInfo = Array.from(new Array(20), (val, index) => index);
   }
   render() {
     return (
@@ -62,9 +96,24 @@ class Main2 extends Component {
         }}>
           <Divider />
         </div>
-        <div>
-          <Projectlist />
-        </div>
+
+        {this.state.projectsInfo.slice(this.state.current * 3 - 3, this.state.current * 3).map((projectInfo) => {
+          console.log(projectInfo)
+          return (
+            <div>
+              <Projectlist
+                id={projectInfo.id}
+                projectName={projectInfo.name}
+                stars={projectInfo.sevurityLv}
+                projectId={projectInfo.id}
+                projectContent={projectInfo.projectContent}
+                projectStatus={projectInfo.projectStatus}
+                projectPublicer={projectInfo.user}
+                projectEnd={projectInfo.projectEnd}/>
+            </div>
+          )
+        })}
+
         <div style={{
           display: 'flex',
           width: this.state.width * 0.8,
@@ -73,7 +122,7 @@ class Main2 extends Component {
           justifyContent: 'center',
           alignItems: 'center',
         }}>
-          <Pagination defaultCurrent={1} total={50} />
+          <Pagination current={this.state.current} pageSize={3} onChange={this.onChange} total={this.state.projectsInfo.length} />
         </div>
       </div>
 
