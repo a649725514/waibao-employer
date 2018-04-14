@@ -3,12 +3,79 @@ import Topbar from '../component/topbar';
 import { Input, DatePicker, Select, Tooltip, Icon, Tag, Transfer, Button, InputNumber, Upload } from 'antd';
 import moment from 'moment';
 import { Scrollbars } from 'react-custom-scrollbars';
+import { Link } from "react-router-dom";
+
 const Option = Select.Option;
 const { MonthPicker, RangePicker } = DatePicker;
 const dateFormat = 'YYYY/MM/DD';
 const monthFormat = 'YYYY/MM';
 const { TextArea } = Input;
-const mockData = [];
+const mockData = [   {
+    key: "10000",
+    title: "马化腾",
+    description: "18100178922"
+},
+{
+    key: "20001",
+    title: "高德伟",
+    description: "18100178922"
+},
+{
+    key: "20002",
+    title: "霍建华",
+    description: "18100178922"
+},
+{
+    key: "20003",
+    title: "张开涛",
+    description: "18100178922"
+},
+{
+    key: "20004",
+    title: "李林峰",
+    description: "18100178922"
+},
+{
+    key: "20005",
+    title: "霍斯特曼",
+    description: "18100178922"
+},
+{
+    key: "20006",
+    title: "雷布斯",
+    description: "18100178922"
+},
+{
+    key: "20007",
+    title: "李彦宏",
+    description: '18100178922'
+},
+{
+    key: "11121",
+    title: "丁磊",
+    description: "18100178922"
+},
+{
+    key: "22222",
+    title: '陈奕迅',
+    description: "18100178922"
+},
+{
+    key: "22212",
+    title: "李天",
+    description: "18100178922"
+},
+{
+    key: "2222222",
+    title: "洪金宝",
+    description: '18100178922'
+},
+{
+    key: "33333",
+    title: "约翰",
+    description: "18100178922"
+}
+];
 const props = {
     action: '//jsonplaceholder.typicode.com/posts/',
     onChange({ file, fileList }) {
@@ -35,13 +102,13 @@ const props = {
         url: 'http://www.baidu.com/zzz.png',
     }],
 };
-for (let i = 0; i < 20; i++) {
-    mockData.push({
-        key: i.toString(),
-        title: `content${i + 1}`,
-        description: `description of content${i + 1}`,
-    });
-}
+// for (let i = 0; i < 20; i++) {
+//     mockData.push({
+//         key: i.toString(),
+//         title: `content${i + 1}`,
+//         description: `description of content${i + 1}`,
+//     });
+// }
 const targetKeys = mockData
     .filter(item => +item.key % 3 > 1)
     .map(item => item.key);
@@ -186,9 +253,8 @@ export default class Addtask extends Component {
                                 alignItems: 'flex-start',
                             }}>
                                 <Select defaultValue="所属项目" style={{ width: 120 }} onChange={this.handleChange2}>
-                                    <Option value="项目A">项目A</Option>
-                                    <Option value="项目B">项目B</Option>
-                                    <Option value="项目C">项目C</Option>
+                                    <Option value="虹软智包平台">虹软智包平台</Option>
+                                    <Option value="项目二">项目二</Option>
                                 </Select>
                             </div>
                             <div style={{
@@ -199,7 +265,9 @@ export default class Addtask extends Component {
                                 justifyContent: 'center',
                                 alignItems: 'flex-end',
                             }}>
-                                <Button type="primary">发布任务</Button>
+                                <Link to="/main">
+                                    <Button type="primary" >发布任务</Button>
+                                </Link>
                             </div>
                         </div>
                         <div style={{
