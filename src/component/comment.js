@@ -117,7 +117,9 @@ export default class Comment extends Component {
         })
     }
     press4() {
+        if(this.props.stars > 1) {
             ipcRenderer.send('camera-message', 'ping')
+        }
         this.setState({
             display1: 'none',
             display2: 'none',

@@ -50,7 +50,7 @@ export default class Tasks extends Component {
                     <Bolddivider />
                     <Selfsay title='任务说明' content={this.state.info.taskContent} />
                     <Bolddivider />
-                    <Comment1 taskId={this.state.info.id} />
+                    <Comment1 taskId={this.state.info.id} stars={this.state.info.stars}/>
                 </Scrollbars>
             </div>
         );
