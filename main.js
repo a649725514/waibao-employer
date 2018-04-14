@@ -33,7 +33,7 @@ function createWindow() {
 
 function createCameraWindows() {
   const modalPath = path.join('file://', __dirname, 'src/windows/HTML5Camera.html')
-  let win = new BrowserWindow({ frame: false, width: 800, height: 600 })
+  let win = new BrowserWindow({ frame: false, width: 800, height: 700 })
   win.on('close', function () { win = null })
   win.loadURL(modalPath)
   win.show()
