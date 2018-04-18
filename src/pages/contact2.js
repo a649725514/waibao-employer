@@ -156,7 +156,7 @@ var url1 = 'http://120.78.74.75:8080/demo/s/getCountsOfUser'; // 接口url
           {this.state.persion2.slice(this.state.current * 6 - 5, this.state.current * 6 + 1).map((persionInfo) => {
             return (
               <div>
-                <Link to={`/othermessage/`+persionInfo.workNumber}>
+                <Link to={`/employermessage/`+persionInfo.workNumber}>
                   <Contactcard2 src={'http://120.78.74.75:8010/'+persionInfo.workNumber+'/1.jpg'} name={persionInfo.name} department={persionInfo.department} duty={persionInfo.offer}/>
                 </Link>
               </div>

@@ -3,10 +3,11 @@ import  { Rate } from 'antd';
 export default class Resource extends Component{
     static defaultProps={
         pic:require('../icon/file-movie-o.svg'),
-        name:'视频.mp4',
-        comefrom:'发包人员A',
-        stars:2,
-        date:'2018.3.1'
+        name:'功能概要.docx',
+        comefrom:'刘德华',
+        stars:3,
+        date:'2018.4.15',
+        display:'flex'
     };
     constructor(props){
 		super(props);
@@ -18,7 +19,7 @@ export default class Resource extends Component{
     render(){
         return (
             <div style={{
-                display:'flex',
+                display:this.props.display,
                 width:this.state.width*0.85,
                 height:this.state.height*0.06,
                 flexDirection:'row',

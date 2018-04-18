@@ -29,6 +29,7 @@ export default class Comment1 extends Component {
             borderBottomColor2: '#e9e9e9',
             borderBottomColor3: '#e9e9e9',
             borderBottomColor4: '#e9e9e9',
+            display:'flex'
         };
         ipcRenderer.on('camera-message-reply', function (event, arg) {
         })
@@ -189,9 +190,7 @@ export default class Comment1 extends Component {
                     alignItems: 'center',
                 }}>
                     <Say />
-                    <Msg user={"用户H"} situation={"做的不错"} comefrom={"1L"} pic={require('../pic/01.png')} />
-                    <Msg user={"用户C回复1L"} situation={"谢谢！"} comefrom={"2L"} pic={require('../pic/02.png')} />
-                    <Msg user={"用户H回复2L"} situation={"/smile"} comefrom={"3L"} pic={require('../pic/01.png')} />
+                    
                 </div>
                 <div style={{
                     display: this.state.display2,
@@ -200,7 +199,9 @@ export default class Comment1 extends Component {
                     justifyContent: 'flex-start',
                     alignItems: 'center',
                 }}>
-                    <Member />
+                    <Member name='马化腾' company='浙大网新' time='7' pic={'http://120.78.74.75:8010/10000/1.jpg'}/>
+                    <Member name='高德伟' company='东软集团' time='8' pic={'http://120.78.74.75:8010/20001/1.jpg'}/>
+
                 </div>
                 <div style={{
                     display: this.state.display3,
@@ -227,7 +228,7 @@ export default class Comment1 extends Component {
                             }}>{'上传附件'}</h>
                         </div>
                     </Upload>
-                    <Resource />
+                    <Resource display={this.state.display} />
                 </div>
                 <div style={{
                     display: this.state.display4,
@@ -244,10 +245,11 @@ export default class Comment1 extends Component {
                         width: this.state.width * 0.85,
                         height: this.state.height * 0.06,
                     }}>
-                        <Button style={{marginLeft:20,backgroundColor:'rgb(132,195,85)',width:this.state.width*0.1}}><h style={{color:'white'}}>通过</h></Button>
+                        <Button style={{marginLeft:20,backgroundColor:'rgb(132,195,85)',width:this.state.width*0.1}} onClick={()=> {alert("审核已通过")}} ><h style={{color:'white'}}>通过</h></Button>
                         <Button style={{marginLeft:20,width:this.state.width*0.1}} type='danger'>不通过</Button>
                     </div>
-                    <Resource1 />
+                    <Resource1 name='视频.mp4' comefrom='马化腾'/>
+                    <Resource1 name='视频说明.dcox' comefrom='马化腾'/>
                 </div>
             </div>
         );

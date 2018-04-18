@@ -46,7 +46,8 @@ export default class Tasks extends Component {
                         name={this.state.info.name}
                         duty={this.state.info.duty}
                         tele={this.state.info.tele}
-                        email={this.state.info.email} />
+                        email={this.state.info.email}
+                        path={'http://120.78.74.75:8010/20000/1.jpg'} />
                     <Bolddivider />
                     <Selfsay title='任务说明' content={this.state.info.taskContent} />
                     <Bolddivider />
