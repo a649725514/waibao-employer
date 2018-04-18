@@ -14,8 +14,8 @@ import {
     YAxis,
     HorizontalGridLines,
     VerticalGridLines,
-    LineSeries
-} from 'index';
+    LineMarkSeries,
+} from 'react-vis';
 const { ipcRenderer } = window.electron;
 
 export default class Comment1 extends Component {
@@ -315,23 +315,26 @@ export default class Comment1 extends Component {
                     alignItems: 'center',
                 }}>
                     <XYPlot
-                        width={300}
+                        width={600}
                         height={300}>
                         <HorizontalGridLines />
                         <VerticalGridLines />
-                        <XAxis title="X Axis" position="start" />
+                        <XAxis title="X Axis" position="end" />
                         <YAxis title="Y Axis" />
-                        <LineSeries
-                            className="first-series"
+                        <LineMarkSeries
+                            className="linemark-series-example"
+                            style={{
+                                stroke: 'white'
+                            }}
+                            //curve={'curveMonotoneX'}
                             data={[
-                                { x: 1, y: 3 },
+                                { x: 1, y: 10 },
                                 { x: 2, y: 5 },
-                                { x: 3, y: 15 },
-                                { x: 4, y: 12 }
+                                { x: 3, y: 15 }
                             ]} />
                     </XYPlot>
                 </div>
-                </div>
-                );
-            }
+            </div>
+        );
+    }
 }
