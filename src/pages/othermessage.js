@@ -61,6 +61,7 @@ export default class Othermessage extends Component {
                 <Topbar title="他人信息" />
                 <Scrollbars style={{width:this.state.width*0.85,height:this.state.height*0.94}}>
                     <Selfmsgcard src1={require('../icon/chevron-left.svg')} 
+                  src={'http://120.78.74.75:8010/'+this.state.persionInfo.workNumber+'/1.jpg'}
                                 name={this.state.persionInfo.name}
                                 company={this.state.persionInfo.company}
                                 email={this.state.persionInfo.email}

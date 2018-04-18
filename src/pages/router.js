@@ -106,7 +106,7 @@ const routes = [
     component: Othermessage,
   },
   {
-    path:"/employermessage",
+    path:"/employermessage/:id",
     component: Employermessage,
   },
   {

@@ -19,14 +19,15 @@ export default class Taskcard extends Component {
         counts: 8,
         time: 6,
         date0: '2017-12-15',
-        date1: '2018-12-25',
-        date2: '',
-        date3: '',
+        date1: '2018-4-10',
+        date2: '2018-4-15',
+        date3: '2018-4-15',
         name: '甲',
         duty: '技术部 总监',
         tele: '12345678987',
         email: '123456789@qq.com',
-        path: require('../pic/02.png')
+        path: require('../pic/02.png'),
+        current:2
     };
     constructor(props) {
         super(props);
@@ -139,7 +140,7 @@ export default class Taskcard extends Component {
                         alignItems: 'center',
                     }}>
                         {/* <Button style={{ marginRight: this.state.width * 0.05 }} size='large' type='primary' onClick={() => ipcRenderer.send('camera-message', 'ping')}>开始工作</Button> */}
-                        <TimeDisplay />
+                        {/* <TimeDisplay /> */}
                     </div>
                 </div>
                 <div style={{
@@ -150,7 +151,7 @@ export default class Taskcard extends Component {
                     justifyContent: 'center',
                     alignItems: 'center',
                 }}>
-                    <Steps current={1}>
+                    <Steps current={3}>
                         <Step title="已发布" description={this.props.date0} />
                         <Step title="进行中" description={this.props.date1} />
                         <Step title="待审核" description={this.props.date2} />

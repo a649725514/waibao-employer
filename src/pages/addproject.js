@@ -315,7 +315,7 @@ export default class Addproject extends Component {
                             </div>
                             <div style={{
                                 display: 'flex',
-                                width: this.state.width * 0.35,
+                                width: this.state.width * 0.15,
                                 height: this.state.height * 0.06,
                                 flexDirection: 'column',
                                 justifyContent: 'center',
@@ -326,6 +326,16 @@ export default class Addproject extends Component {
                                     <Option value="中">中</Option>
                                     <Option value="低">低</Option>
                                 </Select>
+                            </div>
+                            <div style={{
+                                width:this.state.width*0.2,
+                                height: this.state.height * 0.06,
+                                flexDirection: 'column',
+                                justifyContent: 'center',
+                                alignItems: 'flex-start',
+                                marginTop:15
+                            }}>
+                                <h style={{color:'rgb(0,122,255)'}}>{'自定义'}</h>
                             </div>
                         </div>
                         <div style={{

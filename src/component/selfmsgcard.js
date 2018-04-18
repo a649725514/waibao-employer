@@ -4,13 +4,13 @@ import envelope from '../icon/envelope.svg';
 import { Link } from "react-router-dom";
 export default class Selfmeaasge extends Component{
     static defaultProps={
-        name:'张三',
-        company:'A外包公司',
-        src:require('../pic/01.png'),
+        name:'刘德华',
+        company:'研发部码农',
+        src:'http://120.78.74.75:8010/20000/1.jpg',
         src1:null,
         src2:null,
-        email:'',
-        tel:'',
+        email:'18100174184@qq.com',
+        tel:'18100178922',
         link:''
     };
     constructor(props){
@@ -90,7 +90,7 @@ export default class Selfmeaasge extends Component{
                             width:this.state.height*0.15,
                             height:this.state.height*0.15,
                             borderRadius:this.state.height*0.15/2
-                        }} src={require('../pic/02.png')}>
+                        }} src={this.props.src}>
                         </img>
                     </div>
                 </div> 
