@@ -6,6 +6,8 @@ import Topbar from '../component/topbar'
 import { Link } from "react-router-dom";
 import Contactcard2 from '../component/contactcard2';
 //const test = './pages/test';
+const { ipcRenderer } = window.electron;
+
 const Search = Input.Search;
 class Contact2 extends Component {
   constructor(props) {
@@ -14,7 +16,8 @@ class Contact2 extends Component {
       width: document.body.clientWidth,
       height: document.body.clientHeight,
       persion2: [],
-      current: 1
+      current: 1,
+      token: ipcRenderer.sendSync('get_mine_token', 'please')
 
     })
   }
@@ -24,8 +27,83 @@ class Contact2 extends Component {
     });
   }
 
+  
+  onChange = (page) => {
+    if (this.state.persion2[page * 6 - 5 + 1] == null) {
+      var url = 'http://120.78.74.75:8080/demo/s/getUserMsg?page=' + (page - 1) + '&model=1'; // 接口url
+      fetch(url, {
+        "method": 'POST',
+        "headers": {
+          "Authorization": "Bearer " + this.state.token,
+          "Content-Type": "application/json",
+        },
+      }).then(
+        function (res) {
+          if (res.ok) {
+            // console.log(res.json());
+            return res.json()
+          } else {
+            { this.LogError(res) }
+          }
+        }
+      ).then((PromiseValue) => {
+        for (var i = 0; i < PromiseValue.length; i++) {
+          this.state.persion2[page * 6 - 5 + i] = PromiseValue[i];
+        }
+        this.setState({ current: page })
+      });
+    } else {
+      this.setState({ current: page })
+
+    }
+  }
+
   componentWillMount() {
-    this.state.persion2 = Array.from(new Array(20), (val, index) => index);
+
+var url1 = 'http://120.78.74.75:8080/demo/s/getCountsOfUser'; // 接口url
+    fetch(url1, {
+      "method": 'GET',
+      "headers": {
+        "Authorization": "Bearer " + this.state.token,
+        "Content-Type": "application/json",
+      },
+    }).then(
+      function (res) {
+        if (res.ok) {
+          // console.log(res.json());
+          return res.json()
+
+        } else {
+          { this.LogError(res) }
+        }
+      }
+    ).then((PromiseValue) => {
+      this.setState({ persion2: new Array(3) });
+      var url = 'http://120.78.74.75:8080/demo/s/getUserMsg?page=0&model=1'; // 接口url
+      fetch(url, {
+        "method": 'POST',
+        "headers": {
+          "Authorization": "Bearer " + this.state.token,
+          "Content-Type": "application/json",
+        },
+      }).then(
+        function (res) {
+          if (res.ok) {
+            // console.log(res.json());
+            return res.json()
+          } else {
+            { this.LogError(res) }
+          }
+        }
+      ).then((PromiseValue) => {
+        for (var i = 0; i < PromiseValue.length; i++) {
+          this.state.persion2[1 + i] = PromiseValue[i];
+        }
+        this.setState({ current: 1 })
+      });
+    })
+
+
 
   }
   render() {
@@ -75,11 +153,11 @@ class Contact2 extends Component {
           marginTop: 20,
         }}>
 
-          {this.state.persion2.slice(this.state.current * 6 - 5, this.state.current * 6 + 1).map((persion2Info) => {
+          {this.state.persion2.slice(this.state.current * 6 - 5, this.state.current * 6 + 1).map((persionInfo) => {
             return (
               <div>
-                <Link to='/employermessage'>
-                <Contactcard2 src={require('../pic/07.png')} name={persion2Info} />
+                <Link to={`/othermessage/`+persionInfo.workNumber}>
+                  <Contactcard2 src={'http://120.78.74.75:8010/'+persionInfo.workNumber+'/1.jpg'} name={persionInfo.name} department={persionInfo.department} duty={persionInfo.offer}/>
                 </Link>
               </div>
             )

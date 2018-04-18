@@ -9,12 +9,12 @@ const Step = Steps.Step;
 export default class Projectcard extends Component {
     static defaultProps = {
         taskname: '项目B',
-        date: '2017-12-30',
+        date: '2018-4-15',
         mounth: 5,
         stars: 2,
         counts: 8,
-        date0: '2017-12-15',
-        date1: '2018-12-25',
+        date0: '2018-4-15',
+        date1: '',
         date2: '',
         date3: '',
         name: '甲',
@@ -28,12 +28,17 @@ export default class Projectcard extends Component {
         this.state = {
             width: document.body.clientWidth,
             height: document.body.clientHeight,
-            step: 1
+            step: 0,
+            date1: '',
+
         };
     }
     next() {
         if (this.state.step < 3) {
-            this.setState({ step: this.state.step + 1 })
+            this.setState({
+                step: this.state.step + 1,
+                date1: '2018-4-15'
+            })
             return;
         } else {
             return;
@@ -149,7 +154,7 @@ export default class Projectcard extends Component {
                 }}>
                     <Steps current={this.state.step}>
                         <Step title="发布" description={this.props.date0} />
-                        <Step title="开工" description={this.props.date1} />
+                        <Step title="开工" description={this.state.date1} />
                         <Step title="交付" description={this.props.date2} />
                         <Step title="完工" description={this.props.date3} />
                     </Steps>

@@ -23,7 +23,7 @@ class Message2 extends Component {
   }
 
   componentWillMount() {
-    this.state.Msg2s = Array.from(new Array(20), (val, index) => index);
+    this.state.Msg2s = Array.from(new Array(1), (val, index) => index);
 
   }
 

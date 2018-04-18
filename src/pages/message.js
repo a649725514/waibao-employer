@@ -5,7 +5,7 @@ import Msg from '../component/msg';
 import Topbar from '../component/topbar'
 //import { Scrollbars } from 'react-custom-scrollbars';
 import { Link } from "react-router-dom";
-const {ipcRenderer} = window.electron;
+const { ipcRenderer } = window.electron;
 
 //const test = './pages/test';
 class Message extends Component {
@@ -16,7 +16,7 @@ class Message extends Component {
       height: document.body.clientHeight,
       Msgs: [],
       current: 1,
-      token:ipcRenderer.sendSync('get_mine_token','please')
+      token: ipcRenderer.sendSync('get_mine_token', 'please')
     })
   }
   onChange = (page) => {
@@ -30,7 +30,7 @@ class Message extends Component {
     fetch(url, {
       "method": 'GET',
       "headers": {
-        "Authorization": "Bearer "+this.state.token,
+        "Authorization": "Bearer " + this.state.token,
         "Content-Type": "application/json",
       },
     }).then(
@@ -42,9 +42,9 @@ class Message extends Component {
           { this.LogError(res) }
         }
       }
-    ).then( (PromiseValue) => {
+    ).then((PromiseValue) => {
       for (var i = 0; i < PromiseValue.length; i++) {
-        this.setState({'Msgs': [...this.state.Msgs, PromiseValue[i]]})
+        this.setState({ 'Msgs': [...this.state.Msgs, PromiseValue[i]] })
       }
     });
   }

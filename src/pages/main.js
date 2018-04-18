@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import 'antd/dist/antd.css';
-import { Button, Input, Divider, Pagination,Modal } from 'antd';
+import { Button, Input, Divider, Pagination, Modal } from 'antd';
 import '../App.css';
 import Task from '../component/task';
 import Selfdivider from '../component/divider'
@@ -131,14 +131,14 @@ class Main extends Component {
           }}>
             <Button type="primary" size={'small'} onClick={this.showModal}>+</Button>
             <Modal
-              width={this.state.width*0.25}
+              width={this.state.width * 0.25}
               visible={this.state.visible}
               title="添加"
               onOk={this.handleOk}
               onCancel={this.handleCancel}
               footer={null}
             >
-              <Link to='/addtask'><Button style={{margin:10}} type="primary">添加任务</Button></Link>
+              <Link to='/addtask'><Button style={{ margin: 10 }} type="primary">添加任务</Button></Link>
               <Link to='/addproject'><Button type="primary">添加项目</Button></Link>
             </Modal>
           </div>
@@ -170,13 +170,16 @@ class Main extends Component {
         {this.state.tasksInfo.slice(this.state.current * 3 - 3, this.state.current * 3).map((taskInfo) => {
           return (
             <div>
-              <Task task={taskInfo.taskContent}
+              <Task
+                id={taskInfo.id}
+                task={taskInfo.taskName}
                 uploader={taskInfo.taskPublisher}
-                project={taskInfo.project.projectContent}
+                project={taskInfo.project}
                 time={taskInfo.workload}
                 stars={taskInfo.securityLv}
                 startDate={taskInfo.taskBegin}
-                endDate={taskInfo.taskEnd} />
+                endDate={taskInfo.taskEnd}
+                taskContent={taskInfo.taskContent} />
               <Selfdivider />
             </div>
           )

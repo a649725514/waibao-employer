@@ -4,11 +4,18 @@ import Selfdivider from './divider';
 import { Rate } from 'antd';
 import Animated from 'animated/lib/targets/react-dom';
 import { Link } from "react-router-dom";
+const { ipcRenderer } = window.electron;
+
 export default class Projectlist extends Component {
     static defaultProps = {
-        tasksInfo: [],
-        projectname: '项目B',
+        id: 0,
+        projectName: '项目B',
         stars: 2,
+        projectId: '',
+        projectContent: '如果你无法简洁的表达你的想法，那只说明你还不够了解它。 --阿尔伯特·爱因斯坦',
+        projectStatus: 0,
+        projectPublicer: {},
+        projectEnd: ''
     };
     constructor(props) {
         super(props);
@@ -17,11 +24,40 @@ export default class Projectlist extends Component {
             height: document.body.clientHeight,
             isshow: false,
             display: 'none',
-            anim: new Animated.Value(0)
+            anim: new Animated.Value(0),
+            tasksInfo: [],
+            token: ipcRenderer.sendSync('get_mine_token', 'please')
+
         };
     }
     show() {
         if (this.state.isshow == false) {
+            if (this.state.tasksInfo.length == 0) {
+                var url = 'http://120.78.74.75:8080/demo/project/getTaskOfProject'; // 接口url
+                fetch(url, {
+                    "method": 'POST',
+                    "headers": {
+                        "Authorization": "Bearer " + this.state.token,
+                        "Content-Type": "application/json",
+                    },
+                    "body": JSON.stringify({
+                        "id": this.props.projectId
+                    })
+                }).then(
+                    function (res) {
+                        if (res.ok) {
+                            console.log(res)
+                            return res.json()
+                        } else {
+                            { this.LogError(res) }
+                        }
+                    }
+                ).then((PromiseValue) => {
+                    for (var i = 0; i < PromiseValue.length; i++) {
+                        this.setState({ 'tasksInfo': [...this.state.tasksInfo, PromiseValue[i]] })
+                    }
+                });
+            }
             this.setState({ isshow: true, display: 'flex' })
             const { anim } = this.state;
             anim.stopAnimation(value => {
@@ -82,7 +118,20 @@ export default class Projectlist extends Component {
                         justifyContent: 'flex-start',
                         alignItems: 'center'
                     }}>
-                        <Link to='/projects'><h style={{color:'black'}}>{this.props.projectname}</h></Link>
+                        <Link to={`/projects`
+                            + `/${this.props.id}`
+                            + `/${this.props.projectContent}`
+                            + `/${this.props.projectEnd != '' ? this.props.projectEnd : '未知'}`
+                            + `/${this.props.projectName}`
+                            + `/${this.props.stars}`
+                            + `/5`
+                            + `/${this.props.projectPublicer != null ? this.props.projectPublicer.name : '未知'}`
+                            + `/${this.props.projectPublicer != null ? this.props.projectPublicer.offer : '未知'}`
+                            + `/${this.props.projectPublicer != null ? this.props.projectPublicer.tel : '未知'}`
+                            + `/${this.props.projectPublicer != null ? this.props.projectPublicer.email : '未知'}`
+                            + `/`
+                        }
+                        ><h style={{ color: 'black' }}>{this.props.projectName}</h></Link>
                     </div>
                     <div style={{
                         display: 'flex',
@@ -100,16 +149,19 @@ export default class Projectlist extends Component {
                     flexDirection: 'column',
                     marginTop: 20
                 }}>
-                    {this.props.tasksInfo.map((taskInfo) => {
+                    {this.state.tasksInfo.map((taskInfo) => {
                         return (
                             <div>
-                                <Task task={taskInfo.taskContent}
+                                <Task
+                                    id={taskInfo.id}
+                                    task={taskInfo.taskName}
                                     uploader={taskInfo.taskPublisher}
-                                    project={taskInfo.project.projectContent}
+                                    project={taskInfo.project}
                                     time={taskInfo.workload}
                                     stars={taskInfo.securityLv}
                                     startDate={taskInfo.taskBegin}
-                                    endDate={taskInfo.taskEnd} />
+                                    endDate={taskInfo.taskEnd}
+                                    taskContent={taskInfo.taskContent} />
                                 <Selfdivider />
                             </div>
                         )
