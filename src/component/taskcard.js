@@ -125,7 +125,7 @@ export default class Taskcard extends Component {
                         alignItems: 'center',
                     }}>
                         <Breadcrumb>
-                            <Breadcrumb.Item style={{ marginLeft: 20, color: 'black' }}>{'截止于' + this.props.date}</Breadcrumb.Item>
+                            <Breadcrumb.Item style={{ marginLeft: 20, color: 'black' }}>{'截止于' + this.props.date.substring(1,10)}</Breadcrumb.Item>
                             <Breadcrumb.Item>{this.props.project}</Breadcrumb.Item>
                             <Breadcrumb.Item><a href="">{this.props.counts + '人参与'}</a></Breadcrumb.Item>
                             <Breadcrumb.Item>{this.props.time + '工作量'}</Breadcrumb.Item>

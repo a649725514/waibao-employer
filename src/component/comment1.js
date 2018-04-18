@@ -15,7 +15,7 @@ import {
     HorizontalGridLines,
     VerticalGridLines,
     LineSeries
-} from 'index';
+} from 'react-vis';
 const { ipcRenderer } = window.electron;
 
 export default class Comment1 extends Component {
