@@ -14,7 +14,7 @@ import {
     YAxis,
     HorizontalGridLines,
     VerticalGridLines,
-    LineSeries
+    LineMarkSeries,
 } from 'react-vis';
 const { ipcRenderer } = window.electron;
 
@@ -316,24 +316,34 @@ export default class Comment1 extends Component {
                     justifyContent: 'flex-start',
                     alignItems: 'center',
                 }}>
+                    <h style={{
+                        color:'black',
+                        margin:20
+                    }}>任务工作详情</h>
                     <XYPlot
-                        width={300}
+                        width={600}
                         height={300}>
                         <HorizontalGridLines />
                         <VerticalGridLines />
-                        <XAxis title="X Axis" position="start" />
-                        <YAxis title="Y Axis" />
-                        <LineSeries
-                            className="first-series"
+                        <XAxis title="日期" position="end" />
+                        <YAxis title="工作量(%)" />
+                        <LineMarkSeries
+                            className="linemark-series-example"
+                            style={{
+                                stroke: 'grey'
+                            }}
+                            //curve={'curveMonotoneX'}
                             data={[
-                                { x: 1, y: 3 },
-                                { x: 2, y: 5 },
-                                { x: 3, y: 15 },
-                                { x: 4, y: 12 }
+                                { x: 4.15, y: 0 },
+                                { x: 4.16, y: 15 },
+                                { x: 4.17, y: 20 },
+                                { x: 4.18, y: 40 },
+                                { x: 4.19, y: 75 },
+                                { x: 4.20, y: 100 }
                             ]} />
                     </XYPlot>
                 </div>
-                </div>
-                );
-            }
+            </div>
+        );
+    }
 }
