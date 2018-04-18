@@ -275,7 +275,7 @@ export default class Comment extends Component {
                         width: this.state.width * 0.85,
                         height: this.state.height * 0.06,
                     }}>
-                        <Upload><img style={{ marginRight: this.state.width * 0.04 }} src={require('../icon/plus.svg')}></img></Upload>
+                        <Upload showUploadList={false}><img style={{marginRight:this.state.width*0.04}} src={require('../icon/plus.svg')}></img></Upload>
                     </div>
                     <Resource />
                 </div>

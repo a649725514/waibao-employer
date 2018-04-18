@@ -7,6 +7,15 @@ import Resource from './resource';
 import Resource1 from './resource1';
 import Selfdivider from './divider';
 import { Upload, Button } from 'antd';
+import { curveCatmullRom } from 'd3-shape';
+import {
+    XYPlot,
+    XAxis,
+    YAxis,
+    HorizontalGridLines,
+    VerticalGridLines,
+    LineSeries
+} from 'index';
 const { ipcRenderer } = window.electron;
 
 export default class Comment1 extends Component {
@@ -21,15 +30,18 @@ export default class Comment1 extends Component {
             display2: 'none',
             display3: 'none',
             display4: 'none',
+            display5: 'none',
             color1: 'rgb(26,145,255)',
             color2: 'black',
             color3: 'black',
             color4: 'black',
+            color5: 'black',
             borderBottomColor1: 'white',
             borderBottomColor2: '#e9e9e9',
             borderBottomColor3: '#e9e9e9',
             borderBottomColor4: '#e9e9e9',
-            display:'flex'
+            display:'flex',
+            borderBottomColor5: '#e9e9e9',
         };
         ipcRenderer.on('camera-message-reply', function (event, arg) {
         })
@@ -41,14 +53,17 @@ export default class Comment1 extends Component {
             display2: 'none',
             display3: 'none',
             display4: 'none',
+            display5: 'none',
             color1: 'rgb(26,145,255)',
             color2: 'black',
             color3: 'black',
             color4: 'black',
+            color5: 'black',
             borderBottomColor1: 'white',
             borderBottomColor2: '#e9e9e9',
             borderBottomColor3: '#e9e9e9',
             borderBottomColor4: '#e9e9e9',
+            borderBottomColor5: '#e9e9e9',
         })
     }
     press2() {
@@ -57,14 +72,17 @@ export default class Comment1 extends Component {
             display2: 'flex',
             display3: 'none',
             display4: 'none',
+            display5: 'none',
             color1: 'black',
             color2: 'rgb(26,145,255)',
             color3: 'black',
             color4: 'black',
+            color5: 'black',
             borderBottomColor1: '#e9e9e9',
             borderBottomColor2: 'white',
             borderBottomColor3: '#e9e9e9',
             borderBottomColor4: '#e9e9e9',
+            borderBottomColor5: '#e9e9e9',
         })
     }
     press3() {
@@ -76,14 +94,17 @@ export default class Comment1 extends Component {
             display2: 'none',
             display3: 'flex',
             display4: 'none',
+            display5: 'none',
             color1: 'black',
             color2: 'black',
             color3: 'rgb(26,145,255)',
             color4: 'black',
+            color5: 'black',
             borderBottomColor1: '#e9e9e9',
             borderBottomColor2: '#e9e9e9',
             borderBottomColor3: 'white',
             borderBottomColor4: '#e9e9e9',
+            borderBottomColor5: '#e9e9e9',
         })
     }
     press4() {
@@ -92,14 +113,36 @@ export default class Comment1 extends Component {
             display2: 'none',
             display3: 'none',
             display4: 'flex',
+            display5: 'none',
             color1: 'black',
             color2: 'black',
             color3: 'black',
             color4: 'rgb(26,145,255)',
+            color5: 'black',
             borderBottomColor1: '#e9e9e9',
             borderBottomColor2: '#e9e9e9',
             borderBottomColor3: '#e9e9e9',
             borderBottomColor4: 'white',
+            borderBottomColor5: '#e9e9e9',
+        })
+    }
+    press5() {
+        this.setState({
+            display1: 'none',
+            display2: 'none',
+            display3: 'none',
+            display4: 'none',
+            display5: 'flex',
+            color1: 'black',
+            color2: 'black',
+            color3: 'black',
+            color4: 'black',
+            color5: 'rgb(26,145,255)',
+            borderBottomColor1: '#e9e9e9',
+            borderBottomColor2: '#e9e9e9',
+            borderBottomColor3: '#e9e9e9',
+            borderBottomColor4: '#e9e9e9',
+            borderBottomColor5: 'white',
         })
     }
     click() {
@@ -181,6 +224,21 @@ export default class Comment1 extends Component {
                     }} onClick={() => this.press4()}>
                         <h style={{ color: this.state.color4 }}>{'工作成果'}</h>
                     </div>
+                    <div style={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        width: this.state.width * 0.1,
+                        height: this.state.height * 0.06,
+                        backgroundColor: 'white',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        marginRight: this.state.width * 0.01,
+                        borderBottom: 'solid',
+                        borderBottomColor: this.state.borderBottomColor5,
+                        borderBottomWidth: 1
+                    }} onClick={() => this.press5()}>
+                        <h style={{ color: this.state.color5 }}>{'工作详情'}</h>
+                    </div>
                 </div>
                 <div style={{
                     display: this.state.display1,
@@ -240,8 +298,8 @@ export default class Comment1 extends Component {
                     <div style={{
                         display: 'flex',
                         flexDirection: 'row',
-                        justifyContent:'flex-start',
-                        alignItems:'center',
+                        justifyContent: 'flex-start',
+                        alignItems: 'center',
                         width: this.state.width * 0.85,
                         height: this.state.height * 0.06,
                     }}>
@@ -251,7 +309,31 @@ export default class Comment1 extends Component {
                     <Resource1 name='视频.mp4' comefrom='马化腾'/>
                     <Resource1 name='视频说明.dcox' comefrom='马化腾'/>
                 </div>
-            </div>
-        );
-    }
+                <div style={{
+                    display: this.state.display5,
+                    flexDirection: 'column',
+                    width: this.state.width * 0.85,
+                    justifyContent: 'flex-start',
+                    alignItems: 'center',
+                }}>
+                    <XYPlot
+                        width={300}
+                        height={300}>
+                        <HorizontalGridLines />
+                        <VerticalGridLines />
+                        <XAxis title="X Axis" position="start" />
+                        <YAxis title="Y Axis" />
+                        <LineSeries
+                            className="first-series"
+                            data={[
+                                { x: 1, y: 3 },
+                                { x: 2, y: 5 },
+                                { x: 3, y: 15 },
+                                { x: 4, y: 12 }
+                            ]} />
+                    </XYPlot>
+                </div>
+                </div>
+                );
+            }
 }
